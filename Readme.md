@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Елена Гарипова](https://up.htmlacademy.ru/javascript-individual/2/user/2545671).
-* Наставник: Владимир Вавщик.
+* Наставник: [Владимир Вавщик] (https://htmlacademy.ru/profile/id1610171).
 
 ---
 
