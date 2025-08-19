@@ -7,7 +7,7 @@ checksLengthString('проверяемая строка', 10);
 const isPalindrome = (string) => {
   let poliandrome = '';
 
-  let result = string.replaceAll(' ', '').toLowerCase();
+  const result = string.replaceAll(' ', '').toLowerCase();
   for (let i = result.length - 1; i >= 0; i--) {
     poliandrome += result[i];
   }
