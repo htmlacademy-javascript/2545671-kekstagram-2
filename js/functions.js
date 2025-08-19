@@ -1,22 +1,32 @@
-const checksLengthString = (string, maxLength) => {
-  const result = string.length <= maxLength;
-  return result;
-};
+const checksLengthString = (string, maxLength) => string.length <= maxLength;
 
 checksLengthString('проверяемая строка', 20);
 checksLengthString('проверяемая строка', 18);
 checksLengthString('проверяемая строка', 10);
 
-const checksString = (string) => {
-  let result = string.replaceAll(' ', '');
-  result = result.toLowerCase();
-  let poliandr = '';
+const isPalindrome = (string) => {
+  let poliandrome = '';
 
+  let result = string.replaceAll(' ', '').toLowerCase();
   for (let i = result.length - 1; i >= 0; i--) {
-    poliandr += result[i];
+    poliandrome += result[i];
   }
-  return poliandr === result;
-
+  return poliandrome === result;
 };
 
-checksString('ДовОд');
+isPalindrome('ДовОд');
+
+const extractsNumbers = (string) => {
+  let result = '';
+
+  string = string.toString();
+
+  for (let i = 0; i <= string.length - 1; i++) {
+    if (Number.isNaN(parseInt(string[i], 10)) === false) {
+      result += string[i];
+    }
+  }
+  return result === '' ? NaN : Number(result);
+};
+
+extractsNumbers('2023 год');
