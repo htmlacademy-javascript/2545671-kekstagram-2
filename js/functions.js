@@ -1,4 +1,4 @@
-const checksLengthString = (string, maxLength) => string.length <= maxLength;
+const checksLengthString = (string = '', maxLength = 1) => string.length <= maxLength;
 
 checksLengthString('проверяемая строка', 20);
 checksLengthString('проверяемая строка', 18);
