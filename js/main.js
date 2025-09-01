@@ -26,8 +26,8 @@ const DESCRIPTION = [
   'Полный зал людей на выступлении певца',
   'Бегемоты которые охотятся на внедорожник проезжающий реку'
 ];
-const minLike = 15;
-const maxLike = 200;
+const MIN_LIKE = 15;
+const MAX_LIKE = 200;
 const MESSAGE = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -90,7 +90,7 @@ const createDescriptionPicture = (id, commentId) => {
     id: id,
     address: `photos/${id}.jpg`,
     description: getRandomArrayElement(DESCRIPTION),
-    likes: getRandomInteger(minLike, maxLike),
+    likes: getRandomInteger(MIN_LIKE, MAX_LIKE),
     comments: Array.from({ length: getRandomInteger(0, 30) }, () => getComments(commentId))
   };
 };
