@@ -102,4 +102,3 @@ const getPictures = () => {
 };
 
 getPictures();
-
