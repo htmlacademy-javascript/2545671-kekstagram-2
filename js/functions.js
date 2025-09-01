@@ -40,7 +40,6 @@ const isWorkTime = (startWorkingDay, endWorkingDay, meetingStart, durationMeetin
   const startWorkingDayMinut = timeMinute(startWorkingDay);
   const endWorkingDayMinut = timeMinute(endWorkingDay);
   const meetingStartMinut = timeMinute(meetingStart);
-
   const durationEndMeetingMinute = meetingStartMinut + durationMeeting;
 
   return meetingStartMinut >= startWorkingDayMinut && endWorkingDayMinut >= durationEndMeetingMinute;
