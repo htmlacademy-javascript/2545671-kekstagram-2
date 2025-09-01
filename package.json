@@ -18,6 +18,7 @@
   "license": "MIT",
   "scripts": {
     "start": "vite --port 3000 --open",
+    "liveServer.settings.CustomBrowser": "chrome",
     "lint": "eslint js/"
   },
   "engines": {

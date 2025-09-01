@@ -1,3 +1,7 @@
+import { getRandomInteger } from './util';
+import { getRandomArrayElement } from './util';
+import { createId } from './util';
+
 const COUNT_PICTURE = 25;
 const DESCRIPTION = [
   'Курортный пляж',
@@ -26,8 +30,8 @@ const DESCRIPTION = [
   'Полный зал людей на выступлении певца',
   'Бегемоты которые охотятся на внедорожник проезжающий реку'
 ];
-const MIN_LIKE = 15;
-const MAX_LIKE = 200;
+const minLike = 15;
+const maxLike = 200;
 const MESSAGE = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -56,22 +60,6 @@ const NAME = [
   'Владимир Сычев'
 ];
 
-const getRandomInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
-};
-const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
-
-const createId = () => {
-  let id = 0;
-  return () => {
-    id += 1;
-    return id;
-  };
-};
-
 const createMessage = () => Array.from({ length: getRandomInteger(1, 2) }, () => getRandomArrayElement(MESSAGE)).join(' ');
 
 const getComments = (idComments) => {
@@ -90,7 +78,7 @@ const createDescriptionPicture = (id, commentId) => {
     id: id,
     address: `photos/${id}.jpg`,
     description: getRandomArrayElement(DESCRIPTION),
-    likes: getRandomInteger(MIN_LIKE, MAX_LIKE),
+    likes: getRandomInteger(minLike, maxLike),
     comments: Array.from({ length: getRandomInteger(0, 30) }, () => getComments(commentId))
   };
 };
@@ -101,5 +89,4 @@ const getPictures = () => {
   return Array.from({ length: COUNT_PICTURE }, () => createDescriptionPicture(newId, commentId));
 };
 
-getPictures();
-
+export { getPictures };
