@@ -16,7 +16,6 @@ const getComments = (idComments) => {
   };
 };
 
-
 const createDescriptionPicture = (id, commentId) => {
   id = id();
   return {
