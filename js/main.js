@@ -1,3 +1,1 @@
-import { getPictures } from './data';
-
-getPictures();
+import './rendering-picture';
