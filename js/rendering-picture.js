@@ -8,6 +8,8 @@ const pictureFragment = document.createDocumentFragment();
 
 pictures.forEach((picture) => {
   const newPicture = picturesTemplate.cloneNode(true);
+
+  newPicture.dataset.pictureId = picture.id;
   newPicture.querySelector('.picture__img').src = picture.address;
   newPicture.querySelector('.picture__img').alt = picture.description;
   newPicture.querySelector('.picture__likes').textContent = picture.likes;
@@ -16,4 +18,6 @@ pictures.forEach((picture) => {
 });
 
 listPictures.append(pictureFragment);
-console.log(listPictures);
+
+export { listPictures };
+export { pictures };
