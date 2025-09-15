@@ -19,5 +19,4 @@ pictures.forEach((picture) => {
 
 listPictures.append(pictureFragment);
 
-export { listPictures };
-export { pictures };
+export { listPictures, pictures };
