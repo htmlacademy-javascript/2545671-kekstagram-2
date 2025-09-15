@@ -1,7 +1,8 @@
-const COUNT_PICTURE = 25;
-const MIN_LIKE = 15;
-const MAX_LIKE = 200;
-const DESCRIPTION = [
+export const COUNT_PICTURE = 25;
+export const MIN_LIKE = 15;
+export const MAX_LIKE = 200;
+
+export const DESCRIPTION = [
   'Курортный пляж',
   'Указатель с надписью: GO TO THE BEACH',
   'Берег моря',
@@ -28,7 +29,8 @@ const DESCRIPTION = [
   'Полный зал людей на выступлении певца',
   'Бегемоты которые охотятся на внедорожник проезжающий реку'
 ];
-const MESSAGE = [
+
+export const MESSAGE = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -37,7 +39,8 @@ const MESSAGE = [
   'Лица у людей на фотке перекошены, как будто их избивают.',
   'Как можно было поймать такой неудачный момент?!'
 ];
-const NAME = [
+
+export const NAME = [
   'Алексей Иванов',
   'Василий Петров',
   'Артем Лебедев',
@@ -56,4 +59,15 @@ const NAME = [
   'Владимир Сычев'
 ];
 
-export { COUNT_PICTURE, DESCRIPTION, MIN_LIKE, MAX_LIKE, MESSAGE, NAME };
+export const COMMENT_SHOWN_COUNT = 5;
+
+export const bigPicture = document.querySelector('.big-picture');
+export const bigPictureImg = document.querySelector('.big-picture__img').querySelector('img');
+export const likesCount = document.querySelector('.likes-count');
+export const socialCommentsList = document.querySelector('.social__comments');
+export const commentsTemplate = socialCommentsList.querySelector('.social__comment');
+export const socialCaption = document.querySelector('.social__caption');
+export const socialCommentCount = document.querySelector('.social__comment-count');
+export const commentsLoader = document.querySelector('.comments-loader');
+export const bigPictureCancel = document.querySelector('.big-picture__cancel');
+export const body = document.querySelector('body');
