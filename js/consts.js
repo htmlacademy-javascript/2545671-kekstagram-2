@@ -58,16 +58,3 @@ export const NAME = [
   'Петр Дранго',
   'Владимир Сычев'
 ];
-
-export const COMMENT_SHOWN_COUNT = 5;
-
-export const bigPicture = document.querySelector('.big-picture');
-export const bigPictureImg = document.querySelector('.big-picture__img').querySelector('img');
-export const likesCount = document.querySelector('.likes-count');
-export const socialCommentsList = document.querySelector('.social__comments');
-export const commentsTemplate = socialCommentsList.querySelector('.social__comment');
-export const socialCaption = document.querySelector('.social__caption');
-export const socialCommentCount = document.querySelector('.social__comment-count');
-export const commentsLoader = document.querySelector('.comments-loader');
-export const bigPictureCancel = document.querySelector('.big-picture__cancel');
-export const body = document.querySelector('body');

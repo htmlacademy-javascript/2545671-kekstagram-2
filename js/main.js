@@ -1,5 +1,6 @@
 import { openBigPicture } from './big-picture';
 import { listPictures } from './rendering-picture';
+import './form';
 
 listPictures.addEventListener('click', (evt) => {
   const currentPicture = evt.target.closest('.picture');
@@ -8,3 +9,4 @@ listPictures.addEventListener('click', (evt) => {
     openBigPicture(currentPicture.dataset.pictureId);
   }
 });
+

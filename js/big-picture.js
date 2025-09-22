@@ -1,8 +1,13 @@
 import { pictures } from './rendering-picture';
 import { isEscapeKey } from './utils';
-import { bigPicture, bigPictureImg, likesCount, bigPictureCancel, body, socialCaption } from './consts';
-import { renderingComment, hideComment } from './rendering-comment';
+import { renderComment, hideComment } from './rendering-comment';
 
+const bigPicture = document.querySelector('.big-picture');
+const bigPictureImg = document.querySelector('.big-picture__img').querySelector('img');
+const likesCount = document.querySelector('.likes-count');
+const bigPictureCancel = document.querySelector('.big-picture__cancel');
+const body = document.querySelector('body');
+const socialCaption = document.querySelector('.social__caption');
 
 const onBigPictureEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -33,7 +38,7 @@ const openBigPicture = (pictureId) => {
   likesCount.textContent = newPictures.likes;
   socialCaption.textContent = newPictures.description;
 
-  renderingComment(newPictures.comments);
+  renderComment(newPictures.comments);
 
   bigPicture.classList.remove('hidden');
   bigPictureCancel.addEventListener('click', onBigPictureEscKlick);

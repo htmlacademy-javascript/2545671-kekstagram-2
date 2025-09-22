@@ -1,10 +1,12 @@
-import {
-  socialCommentsList, commentsTemplate, COMMENT_SHOWN_COUNT,
-  commentsLoader, socialCommentCount
-} from './consts';
+const socialCommentsList = document.querySelector('.social__comments');
+const commentsTemplate = socialCommentsList.querySelector('.social__comment');
+const socialCommentCount = document.querySelector('.social__comment-count');
+const commentsLoader = document.querySelector('.comments-loader');
 
+const COMMENT_SHOWN_COUNT = 5;
 let currentIndex = 0;
 let newComments = [];
+
 socialCommentsList.innerHTML = '';
 
 const createComment = () => {
@@ -37,11 +39,11 @@ const hideComment = () => {
   socialCommentsList.removeEventListener('click', createComment);
 };
 
-const renderingComment = (currentComments) => {
+const renderComment = (currentComments) => {
   newComments = currentComments;
   createComment();
 
   commentsLoader.addEventListener('click', createComment);
 };
 
-export { renderingComment, hideComment };
+export { renderComment, hideComment };
