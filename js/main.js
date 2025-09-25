@@ -1,6 +1,8 @@
 import { openBigPicture } from './big-picture';
 import { listPictures } from './rendering-picture';
 import './form';
+import './edit-image';
+
 
 listPictures.addEventListener('click', (evt) => {
   const currentPicture = evt.target.closest('.picture');
