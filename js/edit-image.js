@@ -7,7 +7,6 @@ const image = document.querySelector('.img-upload__preview img');
 
 const sliderContainer = document.querySelector('.img-upload__effect-level');
 const slider = document.querySelector('.effect-level__slider');
-const effectsList = document.querySelectorAll('.effects__list input[type="radio"]');
 
 valueScale.value = `${DEFAULT_SCALE}%`;
 
@@ -73,7 +72,7 @@ const updateEffect = (effect) => {
   }
 };
 
-effectsList.forEach((radio) => {
+document.querySelectorAll('.effects__list input[type="radio"]').forEach((radio) => {
   radio.addEventListener('change', () => {
     const effectName = radio.value;
     const effect = EFFECTS.find((currentElement) => currentElement.name === effectName);
