@@ -1,4 +1,4 @@
-import { isEscapeKey, showSuccessMessage, showErrorMessage } from './utils.js';
+import { isEscapeKey } from './utils.js';
 
 const form = document.querySelector('.img-upload__form');
 const uploadFile = document.querySelector('#upload-file');
@@ -92,14 +92,9 @@ const validateComments = (value) => value.length <= MAX_COMMENT_LENGTH;
 pristine.addValidator(textHashtags, validateHashtags, errorHashtag, false);
 pristine.addValidator(textComment, validateComments, 'Введено более 140 символов', false);
 
-const blockSubmitButton = () => {
-  submitButton.disabled = true;
-  submitButton.textContent = SUBMIT_BUTTON_TEXT.SENDING;
-};
-
-const unblockSubmitButton = () => {
-  submitButton.disabled = false;
-  submitButton.textContent = SUBMIT_BUTTON_TEXT.IDLE;
+const toggleSubmitButton = (isDisabled) => {
+  submitButton.disabled = isDisabled;
+  submitButton.textContent = isDisabled ? SUBMIT_BUTTON_TEXT.SENDING : SUBMIT_BUTTON_TEXT.IDLE;
 };
 
 const setOnFormSubmit = (fn) => {
@@ -108,23 +103,14 @@ const setOnFormSubmit = (fn) => {
     const isValid = pristine.validate();
 
     if (isValid) {
-      blockSubmitButton();
+      toggleSubmitButton(true);
       await fn(new FormData(form));
-      unblockSubmitButton();
+      toggleSubmitButton(false);
     }
   });
-};
-
-const onSendSuccess = () => {
-  closeModal();
-  showSuccessMessage();
-};
-
-const onSendError = () => {
-  showErrorMessage();
 };
 
 uploadFile.addEventListener('change', onUploudFileOpen);
 imgUploadCancel.addEventListener('click', onButtonCancel);
 
-export { setOnFormSubmit, onSendSuccess, onSendError };
+export { setOnFormSubmit, closeModal };

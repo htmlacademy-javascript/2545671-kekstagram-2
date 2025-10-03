@@ -1,3 +1,5 @@
+import { closeModal } from './form.js';
+
 const ALERT_SHOW_TIME = 5000;
 
 const dataError = document.querySelector('#data-error').content.querySelector('.data-error');
@@ -35,18 +37,11 @@ const showDataErrorMessage = () => {
   }, ALERT_SHOW_TIME);
 };
 
-const showSuccessMessage = () => {
-  document.body.append(successMessageTemplate);
+const showMessage = (messageTemplate, buttonSelector) => {
+  document.body.append(messageTemplate);
   document.body.addEventListener('keydown', onEscKeydown);
   document.body.addEventListener('click', onScreenClick);
-  successMessageTemplate.querySelector('.success__button').addEventListener('click', closeMessage);
-};
-
-const showErrorMessage = () => {
-  document.body.append(errorMessageTemplate);
-  document.body.addEventListener('keydown', onEscKeydown);
-  document.body.addEventListener('click', onScreenClick);
-  errorMessageTemplate.querySelector('.error__button').addEventListener('click', closeMessage);
+  messageTemplate.querySelector(buttonSelector).addEventListener('click', closeMessage);
 };
 
 function closeMessage() {
@@ -56,4 +51,13 @@ function closeMessage() {
   document.body.removeEventListener('click', onScreenClick);
 }
 
-export { isEscapeKey, showDataErrorMessage, showSuccessMessage, showErrorMessage };
+const onSendSuccess = () => {
+  closeModal();
+  showMessage(successMessageTemplate, '.success__button');
+};
+
+const onSendError = () => {
+  showMessage(errorMessageTemplate, '.error__button');
+};
+
+export { isEscapeKey, showDataErrorMessage, onSendSuccess, onSendError };

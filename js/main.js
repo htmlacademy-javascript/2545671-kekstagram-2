@@ -1,8 +1,8 @@
 import { renderPictures } from './rendering-picture.js';
-import { setOnFormSubmit, onSendSuccess, onSendError } from './form.js';
+import { setOnFormSubmit } from './form.js';
 import './edit-image';
 import { getData, sendData } from './api.js';
-import { showDataErrorMessage } from './utils.js';
+import { showDataErrorMessage, onSendSuccess, onSendError } from './utils.js';
 
 getData(renderPictures, showDataErrorMessage);
 

@@ -2,7 +2,7 @@ const getData = async (onSuccess, onFail) => {
   const response = await fetch('https://31.javascript.htmlacademy.pro/kekstagram/data');
   try {
     if (!response.ok) {
-      throw new Error('Фотографии незагрузились!');
+      throw new Error('Фотографии не загрузились!');
     }
     const data = await response.json();
     onSuccess(data);
