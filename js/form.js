@@ -1,16 +1,21 @@
-import { isEscapeKey } from './utils';
+import { isEscapeKey } from './utils.js';
 
 const form = document.querySelector('.img-upload__form');
 const uploadFile = document.querySelector('#upload-file');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const imgUploadCancel = document.querySelector('.img-upload__cancel');
-const body = document.querySelector('body');
 const textHashtags = document.querySelector('.text__hashtags');
 const textComment = document.querySelector('.text__description');
+const submitButton = document.querySelector('.img-upload__submit');
 
 const HASHTAGS = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASHTAGS_COUNT = 5;
 const MAX_COMMENT_LENGTH = 140;
+
+const SUBMIT_BUTTON_TEXT = {
+  IDLE: 'Сохранить',
+  SENDING: 'Сохраняю...'
+};
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -20,7 +25,7 @@ const pristine = new Pristine(form, {
 
 const openModal = () => {
   imgUploadOverlay.classList.remove('hidden');
-  body.classList.add('modal-open');
+  document.body.classList.add('modal-open');
   document.addEventListener('keydown', onEscKeydown);
 };
 
@@ -28,7 +33,7 @@ const closeModal = () => {
   form.reset();
   pristine.reset();
   imgUploadOverlay.classList.add('hidden');
-  body.classList.remove('modal-open');
+  document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEscKeydown);
 };
 
@@ -87,11 +92,25 @@ const validateComments = (value) => value.length <= MAX_COMMENT_LENGTH;
 pristine.addValidator(textHashtags, validateHashtags, errorHashtag, false);
 pristine.addValidator(textComment, validateComments, 'Введено более 140 символов', false);
 
-const onFormSubmit = (evt) => {
-  evt.preventDefault();
-  pristine.validate();
+const toggleSubmitButton = (isDisabled) => {
+  submitButton.disabled = isDisabled;
+  submitButton.textContent = isDisabled ? SUBMIT_BUTTON_TEXT.SENDING : SUBMIT_BUTTON_TEXT.IDLE;
+};
+
+const setOnFormSubmit = (fn) => {
+  form.addEventListener('submit', async (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+
+    if (isValid) {
+      toggleSubmitButton(true);
+      await fn(new FormData(form));
+      toggleSubmitButton(false);
+    }
+  });
 };
 
 uploadFile.addEventListener('change', onUploudFileOpen);
 imgUploadCancel.addEventListener('click', onButtonCancel);
-form.addEventListener('submit', onFormSubmit);
+
+export { setOnFormSubmit, closeModal };

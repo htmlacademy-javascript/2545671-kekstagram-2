@@ -1,4 +1,3 @@
-import { pictures } from './rendering-picture';
 import { isEscapeKey } from './utils';
 import { renderComment, hideComment } from './rendering-comment';
 
@@ -6,7 +5,6 @@ const bigPicture = document.querySelector('.big-picture');
 const bigPictureImg = document.querySelector('.big-picture__img').querySelector('img');
 const likesCount = document.querySelector('.likes-count');
 const bigPictureCancel = document.querySelector('.big-picture__cancel');
-const body = document.querySelector('body');
 const socialCaption = document.querySelector('.social__caption');
 
 const onBigPictureEscKeydown = (evt) => {
@@ -24,17 +22,17 @@ const onBigPictureEscKlick = (evt) => {
 function closeBigPicture() {
   hideComment();
   bigPicture.classList.add('hidden');
-  body.classList.remove('modal-open');
+  document.body.classList.remove('modal-open');
   bigPictureCancel.removeEventListener('click', onBigPictureEscKlick);
   document.removeEventListener('keydown', onBigPictureEscKeydown);
 }
 
-const openBigPicture = (pictureId) => {
+const openBigPicture = (pictureId, pictures) => {
 
   const newPictures = pictures.find((picture) => picture.id === Number(pictureId));
 
   likesCount.textContent = newPictures.likes;
-  bigPictureImg.src = newPictures.address;
+  bigPictureImg.src = newPictures.url;
   likesCount.textContent = newPictures.likes;
   socialCaption.textContent = newPictures.description;
 
@@ -42,7 +40,7 @@ const openBigPicture = (pictureId) => {
 
   bigPicture.classList.remove('hidden');
   bigPictureCancel.addEventListener('click', onBigPictureEscKlick);
-  body.classList.add('modal-open');
+  document.body.classList.add('modal-open');
   document.addEventListener('keydown', onBigPictureEscKeydown);
 };
 

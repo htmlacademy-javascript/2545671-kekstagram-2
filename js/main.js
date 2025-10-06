@@ -1,14 +1,11 @@
-import { openBigPicture } from './big-picture';
-import { listPictures } from './rendering-picture';
-import './form';
+import { renderPictures } from './rendering-picture.js';
+import { setOnFormSubmit } from './form.js';
 import './edit-image';
+import { getData, sendData } from './api.js';
+import { showDataErrorMessage, onSendSuccess, onSendError } from './utils.js';
 
+getData(renderPictures, showDataErrorMessage);
 
-listPictures.addEventListener('click', (evt) => {
-  const currentPicture = evt.target.closest('.picture');
-  if (currentPicture) {
-    evt.preventDefault();
-    openBigPicture(currentPicture.dataset.pictureId);
-  }
+setOnFormSubmit(async (photos) => {
+  await sendData(onSendSuccess, onSendError, photos);
 });
-
