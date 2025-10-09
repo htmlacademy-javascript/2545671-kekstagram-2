@@ -1,10 +1,11 @@
-import { renderPictures } from './rendering-picture.js';
+
 import { setOnFormSubmit } from './form.js';
 import './edit-image';
 import { getData, sendData } from './api.js';
 import { showDataErrorMessage, onSendSuccess, onSendError } from './utils.js';
+import { onGetDataSuccess } from './filter.js';
 
-getData(renderPictures, showDataErrorMessage);
+getData(onGetDataSuccess, showDataErrorMessage);
 
 setOnFormSubmit(async (photos) => {
   await sendData(onSendSuccess, onSendError, photos);
