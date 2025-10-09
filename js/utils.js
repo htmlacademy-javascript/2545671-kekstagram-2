@@ -60,4 +60,12 @@ const onSendError = () => {
   showMessage(errorMessageTemplate, '.error__button');
 };
 
-export { isEscapeKey, showDataErrorMessage, onSendSuccess, onSendError };
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export { isEscapeKey, showDataErrorMessage, onSendSuccess, onSendError, debounce };

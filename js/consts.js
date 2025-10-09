@@ -114,3 +114,15 @@ export const EFFECTS = [
     unit: ''
   }
 ];
+
+export const FILTER = {
+  default: 'filter-default',
+  random: 'filter-random',
+  discussed: 'filter-discussed',
+};
+export const PICTURES_COUNT = 10;
+
+export const SORT_FUNCTION = {
+  random: () => Math.random() - 0.5,
+  discussed: (pictureA, pictureB) => pictureB.comments.length - pictureA.comments.length
+};
