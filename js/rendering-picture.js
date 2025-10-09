@@ -6,6 +6,7 @@ const picturesTemplate = document.querySelector('#picture').content.querySelecto
 const pictureFragment = document.createDocumentFragment();
 
 const renderPictures = (pictures) => {
+  listPictures.querySelectorAll('.picture').forEach((element) => element.remove());
   pictures.forEach((picture) => {
     const newPicture = picturesTemplate.cloneNode(true);
 

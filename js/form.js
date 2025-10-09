@@ -7,6 +7,10 @@ const imgUploadCancel = document.querySelector('.img-upload__cancel');
 const textHashtags = document.querySelector('.text__hashtags');
 const textComment = document.querySelector('.text__description');
 const submitButton = document.querySelector('.img-upload__submit');
+const picturePreview = document.querySelector('.img-upload__preview img');
+const effectsPreviews = document.querySelectorAll('.effects__preview');
+
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 const HASHTAGS = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASHTAGS_COUNT = 5;
@@ -55,6 +59,15 @@ const onButtonCancel = () => {
 };
 
 const onUploudFileOpen = () => {
+  const file = uploadFile.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  if (matches) {
+    picturePreview.src = URL.createObjectURL(file);
+    effectsPreviews.forEach((preview) => {
+      preview.style.backgroundImage = `url('${picturePreview.src}')`;
+    });
+  }
   openModal();
 };
 
@@ -113,4 +126,4 @@ const setOnFormSubmit = (fn) => {
 uploadFile.addEventListener('change', onUploudFileOpen);
 imgUploadCancel.addEventListener('click', onButtonCancel);
 
-export { setOnFormSubmit, closeModal };
+export { setOnFormSubmit, closeModal, openModal };
