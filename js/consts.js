@@ -70,7 +70,7 @@ export const EFFECTS = [
     filter: 'none',
     min: 0,
     max: 100,
-    step: 0.1,
+    step: 1,
     unit: ''
   },
   {

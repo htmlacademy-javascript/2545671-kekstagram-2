@@ -7,6 +7,10 @@ const imgUploadCancel = document.querySelector('.img-upload__cancel');
 const textHashtags = document.querySelector('.text__hashtags');
 const textComment = document.querySelector('.text__description');
 const submitButton = document.querySelector('.img-upload__submit');
+const picturePreview = document.querySelector('.img-upload__preview img');
+const effectsPreviews = document.querySelectorAll('.effects__preview');
+
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 const HASHTAGS = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASHTAGS_COUNT = 5;
@@ -20,7 +24,8 @@ const SUBMIT_BUTTON_TEXT = {
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
-  errorTextClass: 'img-upload__field-wrapper--error'
+  errorClass: 'img-upload__field-wrapper--error',
+  errorTextTag: 'div',
 });
 
 const openModal = () => {
@@ -55,6 +60,15 @@ const onButtonCancel = () => {
 };
 
 const onUploudFileOpen = () => {
+  const file = uploadFile.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  if (matches) {
+    picturePreview.src = URL.createObjectURL(file);
+    effectsPreviews.forEach((preview) => {
+      preview.style.backgroundImage = `url('${picturePreview.src}')`;
+    });
+  }
   openModal();
 };
 
@@ -100,9 +114,8 @@ const toggleSubmitButton = (isDisabled) => {
 const setOnFormSubmit = (fn) => {
   form.addEventListener('submit', async (evt) => {
     evt.preventDefault();
-    const isValid = pristine.validate();
 
-    if (isValid) {
+    if (pristine.validate()) {
       toggleSubmitButton(true);
       await fn(new FormData(form));
       toggleSubmitButton(false);
@@ -113,4 +126,4 @@ const setOnFormSubmit = (fn) => {
 uploadFile.addEventListener('change', onUploudFileOpen);
 imgUploadCancel.addEventListener('click', onButtonCancel);
 
-export { setOnFormSubmit, closeModal };
+export { setOnFormSubmit, closeModal, pristine };

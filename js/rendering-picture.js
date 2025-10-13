@@ -1,11 +1,9 @@
-import { openBigPicture } from './big-picture.js';
-
 const listPictures = document.querySelector('.pictures');
 const picturesTemplate = document.querySelector('#picture').content.querySelector('.picture');
-
 const pictureFragment = document.createDocumentFragment();
 
 const renderPictures = (pictures) => {
+  listPictures.querySelectorAll('.picture').forEach((element) => element.remove());
   pictures.forEach((picture) => {
     const newPicture = picturesTemplate.cloneNode(true);
 
@@ -18,14 +16,6 @@ const renderPictures = (pictures) => {
   });
 
   listPictures.append(pictureFragment);
-
-  listPictures.addEventListener('click', (evt) => {
-    const currentPicture = evt.target.closest('.picture');
-    if (currentPicture) {
-      evt.preventDefault();
-      openBigPicture(currentPicture.dataset.pictureId, pictures);
-    }
-  });
 };
 
 export { listPictures, renderPictures };

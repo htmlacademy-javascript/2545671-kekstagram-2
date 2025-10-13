@@ -7,8 +7,12 @@ const image = document.querySelector('.img-upload__preview img');
 
 const sliderContainer = document.querySelector('.img-upload__effect-level');
 const slider = document.querySelector('.effect-level__slider');
+const effectLevelValue = document.querySelector('.effect-level__value');
 
-valueScale.value = `${DEFAULT_SCALE}%`;
+const scalePicture = (value = DEFAULT_SCALE) => {
+  valueScale.value = `${value}%`;
+  image.style.transform = `scale(${value / 100})`;
+};
 
 const onbuttonSmallerClick = () => {
   const currentValueScale = parseInt(valueScale.value, 10);
@@ -16,8 +20,7 @@ const onbuttonSmallerClick = () => {
   if (newValueScale < MIN_VALUE_SCALE) {
     newValueScale = MIN_VALUE_SCALE;
   }
-  valueScale.value = `${newValueScale}%`;
-  image.style.transform = `scale(${newValueScale / 100})`;
+  scalePicture(newValueScale);
 };
 
 const onbuttonBiggerClick = () => {
@@ -26,8 +29,7 @@ const onbuttonBiggerClick = () => {
   if (newValueScale > MAX_VALUE_SCALE) {
     newValueScale = MAX_VALUE_SCALE;
   }
-  valueScale.value = `${newValueScale}%`;
-  image.style.transform = `scale(${newValueScale / 100})`;
+  scalePicture(newValueScale);
 };
 
 buttonSmaller.addEventListener('click', onbuttonSmallerClick);
@@ -81,8 +83,11 @@ document.querySelectorAll('.effects__list input[type="radio"]').forEach((radio) 
 });
 
 slider.noUiSlider.on('update', () => {
-  const value = slider.noUiSlider.get();
+  const value = parseFloat(slider.noUiSlider.get());
+  const newValue = Math.round(value * 10) / 10;
+  effectLevelValue.value = Number.isInteger(newValue) ? String(newValue) : newValue.toString();
   applyFilter(currentEffect, value);
+
 });
 
 sliderContainer.classList.add('hidden');
