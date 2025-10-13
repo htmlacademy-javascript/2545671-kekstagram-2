@@ -1,8 +1,5 @@
-import { openBigPicture } from './big-picture.js';
-
 const listPictures = document.querySelector('.pictures');
 const picturesTemplate = document.querySelector('#picture').content.querySelector('.picture');
-
 const pictureFragment = document.createDocumentFragment();
 
 const renderPictures = (pictures) => {

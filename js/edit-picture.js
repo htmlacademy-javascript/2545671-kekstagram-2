@@ -9,8 +9,6 @@ const sliderContainer = document.querySelector('.img-upload__effect-level');
 const slider = document.querySelector('.effect-level__slider');
 const effectLevelValue = document.querySelector('.effect-level__value');
 
-
-
 const scalePicture = (value = DEFAULT_SCALE) => {
   valueScale.value = `${value}%`;
   image.style.transform = `scale(${value / 100})`;
