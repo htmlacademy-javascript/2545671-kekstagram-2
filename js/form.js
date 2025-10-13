@@ -24,7 +24,8 @@ const SUBMIT_BUTTON_TEXT = {
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
-  errorTextClass: 'img-upload__field-wrapper--error'
+  errorClass: 'img-upload__field-wrapper--error',
+  errorTextTag: 'div',
 });
 
 const openModal = () => {
@@ -113,9 +114,8 @@ const toggleSubmitButton = (isDisabled) => {
 const setOnFormSubmit = (fn) => {
   form.addEventListener('submit', async (evt) => {
     evt.preventDefault();
-    const isValid = pristine.validate();
 
-    if (isValid) {
+    if (pristine.validate()) {
       toggleSubmitButton(true);
       await fn(new FormData(form));
       toggleSubmitButton(false);
@@ -126,4 +126,4 @@ const setOnFormSubmit = (fn) => {
 uploadFile.addEventListener('change', onUploudFileOpen);
 imgUploadCancel.addEventListener('click', onButtonCancel);
 
-export { setOnFormSubmit, closeModal, openModal };
+export { setOnFormSubmit, closeModal, pristine };

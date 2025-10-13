@@ -19,7 +19,6 @@ const sendData = async (onSuccess, onFail, body) => {
         body,
       });
     if (!response.ok) {
-
       throw new Error('Не удалось отправить форму. Попробуйте ещё раз');
     }
     onSuccess();

@@ -10,6 +10,7 @@ let newComments = [];
 socialCommentsList.innerHTML = '';
 
 const createComment = () => {
+
   const nextComment = newComments.slice(currentIndex, currentIndex + COMMENT_SHOWN_COUNT);
   const nextCommentLength = nextComment.length + currentIndex;
 
@@ -23,13 +24,13 @@ const createComment = () => {
     socialComments.push(newCommentsTemplate);
   });
 
-  socialCommentsList.append(...socialComments);
-  socialCommentCount.textContent = `${nextCommentLength} из ${newComments.length} комментариев`;
-
   if (nextCommentLength >= newComments.length) {
     commentsLoader.classList.add('hidden');
+    currentIndex = commentsLoader.length;
   }
   currentIndex += COMMENT_SHOWN_COUNT;
+  socialCommentsList.append(...socialComments);
+  socialCommentCount.textContent = `${nextCommentLength} из ${newComments.length} комментариев`;
 };
 
 const hideComment = () => {
@@ -42,8 +43,8 @@ const hideComment = () => {
 const renderComment = (currentComments) => {
   newComments = currentComments;
   createComment();
-
   commentsLoader.addEventListener('click', createComment);
+
 };
 
 export { renderComment, hideComment };
