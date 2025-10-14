@@ -1,4 +1,18 @@
 import { isEscapeKey } from './utils.js';
+import { resetScalePicture, resetSlider } from './edit-picture.js';
+
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
+const HASHTAGS = /^#[a-zа-яё0-9]{1,19}$/i;
+
+const MAX_HASHTAGS_COUNT = 5;
+
+const MAX_COMMENT_LENGTH = 140;
+
+const SUBMIT_BUTTON_TEXT = {
+  IDLE: 'Сохранить',
+  SENDING: 'Сохраняю...'
+};
 
 const form = document.querySelector('.img-upload__form');
 const uploadFile = document.querySelector('#upload-file');
@@ -9,17 +23,6 @@ const textComment = document.querySelector('.text__description');
 const submitButton = document.querySelector('.img-upload__submit');
 const picturePreview = document.querySelector('.img-upload__preview img');
 const effectsPreviews = document.querySelectorAll('.effects__preview');
-
-const FILE_TYPES = ['jpg', 'jpeg', 'png'];
-
-const HASHTAGS = /^#[a-zа-яё0-9]{1,19}$/i;
-const MAX_HASHTAGS_COUNT = 5;
-const MAX_COMMENT_LENGTH = 140;
-
-const SUBMIT_BUTTON_TEXT = {
-  IDLE: 'Сохранить',
-  SENDING: 'Сохраняю...'
-};
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -36,6 +39,8 @@ const openModal = () => {
 
 const closeModal = () => {
   form.reset();
+  resetScalePicture();
+  resetSlider();
   pristine.reset();
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -73,7 +78,7 @@ const onUploudFileOpen = () => {
 };
 
 let error = '';
-const errorHashtag = () => error;
+const showErrorHashtag = () => error;
 
 const validateHashtags = (value) => {
 
@@ -103,7 +108,7 @@ const validateHashtags = (value) => {
 
 const validateComments = (value) => value.length <= MAX_COMMENT_LENGTH;
 
-pristine.addValidator(textHashtags, validateHashtags, errorHashtag, false);
+pristine.addValidator(textHashtags, validateHashtags, showErrorHashtag, false);
 pristine.addValidator(textComment, validateComments, 'Введено более 140 символов', false);
 
 const toggleSubmitButton = (isDisabled) => {

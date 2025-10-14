@@ -12,7 +12,7 @@ let currentFilter = '';
 const filterPictures = () => {
   switch (currentFilter) {
     case FILTER.random:
-      return [...pictures].sort(SORT_FUNCTION.random).slice(0, PICTURES_COUNT);
+      return [...pictures].sort(SORT_FUNCTION.getRandom).slice(0, PICTURES_COUNT);
     case FILTER.discussed:
       return [...pictures].sort(SORT_FUNCTION.discussed);
     default:
