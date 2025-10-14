@@ -1,21 +1,20 @@
-const socialCommentsList = document.querySelector('.social__comments');
-const commentsTemplate = socialCommentsList.querySelector('.social__comment');
-const socialCommentCount = document.querySelector('.social__comment-count');
-const commentsLoader = document.querySelector('.comments-loader');
-
 const COMMENT_SHOWN_COUNT = 5;
 let currentIndex = 0;
 let newComments = [];
 
+const socialCommentsList = document.querySelector('.social__comments');
+const commentsTemplate = socialCommentsList.querySelector('.social__comment');
+const socialCommentCount = document.querySelector('.social__comment-count');
+const commentsLoader = document.querySelector('.comments-loader');
 socialCommentsList.innerHTML = '';
 
-const createComment = () => {
+const onCommentClick = () => {
 
-  const nextComment = newComments.slice(currentIndex, currentIndex + COMMENT_SHOWN_COUNT);
-  const nextCommentLength = nextComment.length + currentIndex;
+  const nextComments = newComments.slice(currentIndex, currentIndex + COMMENT_SHOWN_COUNT);
+  const nextCommentLength = nextComments.length + currentIndex;
 
   const socialComments = [];
-  nextComment.forEach((comment) => {
+  nextComments.forEach((comment) => {
     const newCommentsTemplate = commentsTemplate.cloneNode(true);
     newCommentsTemplate.querySelector('.social__picture').src = comment.avatar;
     newCommentsTemplate.querySelector('.social__picture').alt = comment.name;
@@ -37,13 +36,13 @@ const hideComment = () => {
   currentIndex = 0;
   socialCommentsList.innerHTML = '';
   commentsLoader.classList.remove('hidden');
-  socialCommentsList.removeEventListener('click', createComment);
+  socialCommentsList.removeEventListener('click', onCommentClick);
 };
 
 const renderComment = (currentComments) => {
   newComments = currentComments;
-  createComment();
-  commentsLoader.addEventListener('click', createComment);
+  onCommentClick();
+  commentsLoader.addEventListener('click', onCommentClick);
 
 };
 

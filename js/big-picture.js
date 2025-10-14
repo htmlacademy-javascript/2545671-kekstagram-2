@@ -1,5 +1,5 @@
-import { isEscapeKey } from './utils';
-import { renderComment, hideComment } from './rendering-comment';
+import { isEscapeKey } from './utils.js';
+import { renderComment, hideComment } from './rendering-comment.js';
 
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImg = document.querySelector('.big-picture__img').querySelector('img');

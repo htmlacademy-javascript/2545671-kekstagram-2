@@ -1,14 +1,5 @@
 import { isEscapeKey } from './utils.js';
-
-const form = document.querySelector('.img-upload__form');
-const uploadFile = document.querySelector('#upload-file');
-const imgUploadOverlay = document.querySelector('.img-upload__overlay');
-const imgUploadCancel = document.querySelector('.img-upload__cancel');
-const textHashtags = document.querySelector('.text__hashtags');
-const textComment = document.querySelector('.text__description');
-const submitButton = document.querySelector('.img-upload__submit');
-const picturePreview = document.querySelector('.img-upload__preview img');
-const effectsPreviews = document.querySelectorAll('.effects__preview');
+import { resetScalePicture, resetSlider } from './edit-picture.js';
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
@@ -20,6 +11,16 @@ const SUBMIT_BUTTON_TEXT = {
   IDLE: 'Сохранить',
   SENDING: 'Сохраняю...'
 };
+
+const form = document.querySelector('.img-upload__form');
+const uploadFile = document.querySelector('#upload-file');
+const imgUploadOverlay = document.querySelector('.img-upload__overlay');
+const imgUploadCancel = document.querySelector('.img-upload__cancel');
+const textHashtags = document.querySelector('.text__hashtags');
+const textComment = document.querySelector('.text__description');
+const submitButton = document.querySelector('.img-upload__submit');
+const picturePreview = document.querySelector('.img-upload__preview img');
+const effectsPreviews = document.querySelectorAll('.effects__preview');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -36,6 +37,8 @@ const openModal = () => {
 
 const closeModal = () => {
   form.reset();
+  resetScalePicture();
+  resetSlider();
   pristine.reset();
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -73,7 +76,7 @@ const onUploudFileOpen = () => {
 };
 
 let error = '';
-const errorHashtag = () => error;
+const showErrorHashtag = () => error;
 
 const validateHashtags = (value) => {
 
@@ -103,7 +106,7 @@ const validateHashtags = (value) => {
 
 const validateComments = (value) => value.length <= MAX_COMMENT_LENGTH;
 
-pristine.addValidator(textHashtags, validateHashtags, errorHashtag, false);
+pristine.addValidator(textHashtags, validateHashtags, showErrorHashtag, false);
 pristine.addValidator(textComment, validateComments, 'Введено более 140 символов', false);
 
 const toggleSubmitButton = (isDisabled) => {
