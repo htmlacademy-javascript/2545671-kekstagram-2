@@ -32,6 +32,10 @@ const onbuttonBiggerClick = () => {
   scalePicture(newValueScale);
 };
 
+const resetScalePicture = () => {
+  scalePicture();
+};
+
 buttonSmaller.addEventListener('click', onbuttonSmallerClick);
 buttonBigger.addEventListener('click', onbuttonBiggerClick);
 
@@ -90,4 +94,11 @@ slider.noUiSlider.on('update', () => {
 
 });
 
+const resetSlider = (selectedEffect) => {
+  selectedEffect = EFFECTS[0];
+  updateEffect(selectedEffect);
+};
+
 sliderContainer.classList.add('hidden');
+
+export { resetScalePicture, resetSlider };

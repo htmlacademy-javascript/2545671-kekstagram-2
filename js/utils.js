@@ -15,14 +15,14 @@ const onScreenClick = (evt) => {
   if (evt.target.closest('.success__inner') || evt.target.closest('.error__inner')) {
     return;
   }
-  closeMessage();
+  onMessageClose();
 };
 
 const onEscKeydown = (evt) => {
   if (isEscapeKey) {
     evt.preventDefault();
     evt.stopPropagation();
-    closeMessage();
+    onMessageClose();
   }
 };
 
@@ -39,10 +39,10 @@ const showMessage = (messageTemplate, buttonSelector) => {
   document.body.append(messageTemplate);
   document.body.addEventListener('keydown', onEscKeydown);
   document.body.addEventListener('click', onScreenClick);
-  messageTemplate.querySelector(buttonSelector).addEventListener('click', closeMessage);
+  messageTemplate.querySelector(buttonSelector).addEventListener('click', onMessageClose);
 };
 
-function closeMessage() {
+function onMessageClose() {
   successMessageTemplate.remove();
   errorMessageTemplate.remove();
   document.body.removeEventListener('keydown', onEscKeydown);
